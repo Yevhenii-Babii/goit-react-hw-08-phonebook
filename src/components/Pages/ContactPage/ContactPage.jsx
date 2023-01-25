@@ -27,11 +27,14 @@ function ContactPage() {
 const [name,setName] = useState('');
 const [number, setNumber] = useState('');
 
+
 useEffect(()=> {
   if(userData === null ) return 
   
   dispatch(getContactRequest())
 },[userData,dispatch])
+
+
 
 const onSubmitClick = (event) => {
   event.preventDefault()
