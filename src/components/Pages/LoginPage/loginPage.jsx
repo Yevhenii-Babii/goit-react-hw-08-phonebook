@@ -1,3 +1,10 @@
+
+import * as React from 'react';
+import InputAdornment from '@mui/material/InputAdornment';
+import TextField from '@mui/material/TextField';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import Button from '@mui/material/Button';
+
 import { Loader } from 'components/Loader/Loader';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -6,6 +13,8 @@ import { useNavigate } from 'react-router-dom';
 import { loginUserRequest } from 'redux/auth/UserSlice';
 import { selectError, selectLoaderLogin, selectUser } from 'redux/selectors';
 import { Error } from '../Error/Error';
+import { ContainerInput } from './LoginPage.styled';
+
 
 function Login() {
   const navigation = useNavigate();
@@ -35,31 +44,49 @@ function Login() {
 
   return (
     <div>
-      <h1>Login</h1>
       {isLoading && <Loader />}
       {error && <Error />}
       <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input
+        <ContainerInput>
+          <TextField id="input-with-icon-textfield"
+        label="Email"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <AccountCircle />
+            </InputAdornment>
+          ),
+        }}
+        variant="standard"
             onChange={e => setEmail(e.target.value)}
             value={email}
             type="email"
             required
           />
-        </label>
-        <label>
-          Password:
-          <input
+      
+      
+          <TextField
+        id="input-with-icon-textfield"
+        label="Password"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <AccountCircle />
+            </InputAdornment>
+          ),
+        }}
+        variant="standard"
             onChange={e => setPassword(e.target.value)}
             value={password}
             type="password"
             required
           />
-        </label>
-        <button disabled={isLoading} type="submit">
-          Увійти
-        </button>
+      
+        <Button variant="contained" disabled={isLoading} type="submit">
+          
+          Login
+        </Button>
+        </ContainerInput>
       </form>
     </div>
   );
