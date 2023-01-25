@@ -38,7 +38,6 @@ export const deletContactRequest = createAsyncThunk(
 );
 
 
-
 const initialState = {
    contacts: null,
     isLoading: false,
@@ -90,6 +89,4 @@ const contactSlice = createSlice({
 
   })
   
-
-// Редюсер слайсу
 export const contactReducer = contactSlice.reducer;

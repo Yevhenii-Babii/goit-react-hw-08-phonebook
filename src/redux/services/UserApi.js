@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 const $publicHost = axios.create({
-  baseURL: "https://connections-api.herokuapp.com/",
+  baseURL: 'https://connections-api.herokuapp.com/',
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
 const $privateHost = axios.create({
-  baseURL: "https://connections-api.herokuapp.com/",
+  baseURL: 'https://connections-api.herokuapp.com/',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -20,14 +20,6 @@ const authInterceptor = config => {
 };
 
 $privateHost.interceptors.request.use(authInterceptor);
-
-// {
-//     baseURL: "https://connections-api.herokuapp.com/",
-//     headers: {
-//       'Content-Type': 'application/json',
-//       'Authorization': localStorage.getItem('token'),
-//     },
-//  }
 
 export const UserAPI = {
   async register(formData) {

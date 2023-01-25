@@ -13,16 +13,19 @@ export default function Layout() {
   const userLogIn = userData !== null;
   const dispatch = useDispatch();
   const onLogOut = () => {
-    dispatch(logOutRequest())
-  }
+    dispatch(logOutRequest());
+  };
   return (
     <>
       <header>
         <Navigations>
           {userLogIn ? (
             <>
-            <Links to="/contacts"> Contacts </Links> 
-            <Button type='button' onClick={onLogOut}> Log out </Button>
+              <Links to="/contacts"> Contacts </Links>
+              <Button type="button" onClick={onLogOut}>
+                {' '}
+                Log out{' '}
+              </Button>
             </>
           ) : (
             <>

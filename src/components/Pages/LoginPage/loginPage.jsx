@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
@@ -14,7 +13,6 @@ import { loginUserRequest } from 'redux/auth/UserSlice';
 import { selectError, selectLoaderLogin, selectUser } from 'redux/selectors';
 import { Error } from '../Error/Error';
 import { ContainerInput } from './LoginPage.styled';
-
 
 function Login() {
   const navigation = useNavigate();
@@ -48,44 +46,43 @@ function Login() {
       {error && <Error />}
       <form onSubmit={handleSubmit}>
         <ContainerInput>
-          <TextField id="input-with-icon-textfield"
-        label="Email"
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <AccountCircle />
-            </InputAdornment>
-          ),
-        }}
-        variant="standard"
+          <TextField
+            id="input-with-icon-textfield"
+            label="Email"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <AccountCircle />
+                </InputAdornment>
+              ),
+            }}
+            variant="standard"
             onChange={e => setEmail(e.target.value)}
             value={email}
             type="email"
             required
           />
-      
-      
+
           <TextField
-        id="input-with-icon-textfield"
-        label="Password"
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <AccountCircle />
-            </InputAdornment>
-          ),
-        }}
-        variant="standard"
+            id="input-with-icon-textfield"
+            label="Password"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <AccountCircle />
+                </InputAdornment>
+              ),
+            }}
+            variant="standard"
             onChange={e => setPassword(e.target.value)}
             value={password}
             type="password"
             required
           />
-      
-        <Button variant="contained" disabled={isLoading} type="submit">
-          
-          Login
-        </Button>
+
+          <Button variant="contained" disabled={isLoading} type="submit">
+            Login
+          </Button>
         </ContainerInput>
       </form>
     </div>
