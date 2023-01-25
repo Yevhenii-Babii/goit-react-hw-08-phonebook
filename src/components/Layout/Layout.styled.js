@@ -15,9 +15,11 @@ export const Navigations = styled.nav`
   justify-content: center;
 `;
 
-export const LabelFlex = styled.label`
-display: block;
-margin-bottom: 20px;
-font-size: 20px;
+export const ContainerFlex = styled.div`
+display: flex;
+gap: 20px;
+justify-content: center;
+margin-bottom: 50px;
+margin-top: 50px;
 
 `

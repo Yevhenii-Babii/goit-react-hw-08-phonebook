@@ -13,7 +13,8 @@ import { selectContacts,  selectLoader, selectUser } from "redux/selectors";
 import { addContactRequest, deletContactRequest, getContactRequest } from "redux/slice/contactSlice";
 import { List } from "@mui/material";
 import { AddNewContact, Item, TextContacts } from "./ConctactPage.styled";
-import { LabelFlex } from "components/Layout/Layout.styled";
+import { ContainerFlex} from "components/Layout/Layout.styled";
+import TextField from '@mui/material/TextField';
 
 
 function ContactPage() {
@@ -52,26 +53,28 @@ return (
   {isLoading && <Loader/>}
   <form onSubmit={onSubmitClick}>
             <AddNewContact>Add new contact</AddNewContact>
-            <LabelFlex>
-              Name:
-              <input
+            <ContainerFlex>
+           
+              <TextField id="outlined-basic" label="Name" variant="outlined"
                 value={name}
                 onChange={e => setName(e.target.value)}
                 type="text"
               />
-            </LabelFlex>
-            <LabelFlex>
-              Number:
-              <input
+           
+           
+             
+              <TextField  id="outlined-basic" label="Number" variant="outlined"
                 value={number}
                 onChange={e => setNumber(e.target.value)}
                 type="text"
               />
-            </LabelFlex>
+         
             
             <Button variant="contained" endIcon={<SendIcon />} disabled={isLoading} type="submit">
               Save
             </Button>
+            </ContainerFlex>
+        
           </form>
 
 <TextContacts>Contacts List</TextContacts>
@@ -82,7 +85,7 @@ return (
      return (
       <List key={contact.id}>
         <Item>
-<h3>{contact.name}</h3>
+<p>{contact.name}</p>
 <p>{contact.number}</p>
 <IconButton  aria-label="delete" size="large" onClick={() => onDeleteClick(contact.id)}><DeleteIcon fontSize="inherit" /></IconButton>
         </Item>
