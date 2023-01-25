@@ -4,6 +4,8 @@ import { Outlet } from 'react-router-dom';
 import { logOutRequest } from 'redux/auth/UserSlice.js';
 import { selectUser } from 'redux/selectors.js';
 
+import Button from '@mui/material/Button';
+
 import { Links, Navigations } from '../Layout/Layout.styled.js';
 
 export default function Layout() {
@@ -20,7 +22,7 @@ export default function Layout() {
           {userLogIn ? (
             <>
             <Links to="/contacts"> Contacts </Links> 
-            <button type='button' onClick={onLogOut}> Log out </button>
+            <Button type='button' onClick={onLogOut}> Log out </Button>
             </>
           ) : (
             <>

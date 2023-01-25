@@ -1,19 +1,29 @@
-import { Filter } from "components/Filter/Filter";
-import { Form } from "components/Form/Form";
-import { List } from "components/List/List";
+
+import WithAuthDirect from "components/hoc/WithAuthDirect";
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send';
+import Button from '@mui/material/Button';
 import { Loader } from "components/Loader/Loader";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectContacts, selectError, selectFilter, selectLoader, selectUser } from "redux/selectors";
+import { selectContacts,  selectLoader, selectUser } from "redux/selectors";
 import { addContactRequest, deletContactRequest, getContactRequest } from "redux/slice/contactSlice";
+import { List } from "@mui/material";
+import { AddNewContact, Item, TextContacts } from "./ConctactPage.styled";
+import { Label } from "@mui/icons-material";
+import { LabelFlex } from "components/Layout/Layout.styled";
 
-export function ContactPage() {
+
+function ContactPage() {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
   const userData = useSelector(selectUser);
   const isLoading = useSelector(selectLoader);
-const error = useSelector(selectError);
+
 
 const [name,setName] = useState('');
 const [number, setNumber] = useState('');
@@ -43,74 +53,47 @@ return (
   <>
   {isLoading && <Loader/>}
   <form onSubmit={onSubmitClick}>
-            <h3>Додати новий контакт</h3>
-            <label>
+            <AddNewContact>Add new contact</AddNewContact>
+            <LabelFlex>
               Name:
               <input
                 value={name}
                 onChange={e => setName(e.target.value)}
                 type="text"
               />
-            </label>
-            <label>
+            </LabelFlex>
+            <LabelFlex>
               Number:
               <input
                 value={number}
                 onChange={e => setNumber(e.target.value)}
                 type="text"
               />
-            </label>
+            </LabelFlex>
             
-            <button disabled={isLoading} type="submit">
-              Додати контакт
-            </button>
+            <Button variant="contained" endIcon={<SendIcon />} disabled={isLoading} type="submit">
+              Save
+            </Button>
           </form>
 
-<h2>Список контактів</h2>
+<TextContacts>Contacts List</TextContacts>
 {Array.isArray(contacts) && contacts.length === 0 && <p>У вас відсутні контакти </p>
           }
   {Array.isArray(contacts) && 
     contacts.map((contact)=> {
      return (
-      <ul key={contact.id}>
-        <li>
+      <List key={contact.id}>
+        <Item>
 <h3>{contact.name}</h3>
 <p>{contact.number}</p>
-<button onClick={() => onDeleteClick(contact.id)}>Delete</button>
-        </li>
-      </ul>
+<IconButton  aria-label="delete" size="large" onClick={() => onDeleteClick(contact.id)}><DeleteIcon fontSize="inherit" /></IconButton>
+        </Item>
+      </List>
      ) 
     })
   }
   </>
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // const contacts = useSelector(selectContacts);
-    // const filter = useSelector(selectFilter);
-
-    // const filterName = () => {
-    //     const filterName = filter.toLowerCase().trim();
-    //     return contacts.filter(user =>
-    //       user.name.toLowerCase().trim().includes(filterName)
-    //     );
-    //   };
-    // return ( 
-    //     <>
-    //     <Form/>
-    //     <List contacts={filterName()}/>
-    //     <Filter/>
-    //     </>
-    // )
 }
+const ProtectedPage = WithAuthDirect(ContactPage, "/login")
+export default ProtectedPage
